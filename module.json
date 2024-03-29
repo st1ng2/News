@@ -1,0 +1,9 @@
+{
+    "name": "News",
+    "version": "1.0.0",
+    "description": "Встраивает новости во Flute CMS",
+    "authors": ["Flames"],
+    "providers": ["Flute\\Modules\\News\\ServiceProviders\\ModuleServiceProvider"],
+    "dependencies": {
+    }
+}
