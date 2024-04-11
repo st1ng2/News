@@ -1,7 +1,7 @@
 # News Module for Flute CMS
 
 ## Overview
-The News Module for Flute CMS is a versatile tool designed to enhance your website with dynamic news content. It allows the creation of a news widget, provides an administrative interface for news management, and includes a dedicated page showcasing all news items.
+The News Module for [Flute CMS](https://github.com/Flute-CMS/cms) is a versatile tool designed to enhance your website with dynamic news content. It allows the creation of a news widget, provides an administrative interface for news management, and includes a dedicated page showcasing all news items.
 
 ## Features
 - **News Widget**: Enables the creation of a customizable news widget that can be integrated into various parts of your website.
