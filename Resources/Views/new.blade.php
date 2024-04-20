@@ -18,7 +18,8 @@
         @navigation
         @breadcrumb
 
-        <a href="{{ url('news/') }}" class="btn primary size-s mb-3">
+        <a href="{{ \Nette\Utils\Validators::isUrl($new->slug) ? $new->slug : url('news/' . $new->slug) }}"
+            class="btn primary size-s mb-3">
             @t('def.back')
         </a>
 

@@ -13,7 +13,7 @@
             <div class="news__container">
                 @foreach ($news as $new)
                     <article class="news__slide">
-                        <a href="{{ url('news/'.$new->slug) }}" class="news__block">
+                        <a href="{{ \Nette\Utils\Validators::isUrl($new->slug) ? $new->slug : url('news/' . $new->slug) }}" class="news__block">
                             <div class="news__block-img">
                                 <img src="@at($new->image)" alt="">
                                 <div class="gobtn">
