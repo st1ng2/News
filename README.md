@@ -9,14 +9,17 @@ The News Module for [Flute CMS](https://github.com/Flute-CMS/cms) is a versatile
 - **News Administration**: Facilitates easy management of news content through an admin panel, allowing for the creation, editing, and deletion of news items.
 - **All News Page**: A dedicated page that aggregates all news articles, providing a comprehensive view of current and past news.
 - **Visual Editor for Content**: Enhance news articles with a visual editor, making it easy to create rich and engaging content.
+- **View Counter**: Track the popularity of each news article with a built-in view counter, providing insights into reader engagement.
+- **Scheduled News Posts**: Create and schedule news articles to be published at a future date and time, ensuring timely delivery of content.
 
 ## Screenshots
 *Here, you can find a few snapshots of the News module in action:*
 
-![image](https://github.com/Flute-CMS/News/assets/62756604/e25e5e27-5b47-4f6f-808a-b4d830a32893)
-![image](https://github.com/Flute-CMS/News/assets/62756604/8efdf2d5-4445-488f-b60b-d9da26b7a028)
-![image](https://github.com/Flute-CMS/News/assets/62756604/884d16de-e261-477a-b652-4b8a745a1496)
+![image](https://github.com/Flute-CMS/News/assets/62756604/6ecb67cc-e2c6-4f05-b5b0-19d8695a3d75)
 
+![image](https://github.com/Flute-CMS/News/assets/62756604/8613742c-582d-4f3e-b417-2c93aeb4faf8)
+
+![image](https://github.com/Flute-CMS/News/assets/62756604/d5c6c6e4-9c2b-4f4c-bf19-3e38bc821b45)
 
 ## Installation
 Installation of the News Module follows the standard procedure for Flute CMS modules. Access the admin panel and add the News Module from the module directory.
@@ -26,5 +29,9 @@ Once installed, configure the module to suit your website's layout and preferenc
 
 ## Usage
 With the module installed and configured, you can start creating and managing news articles. The news widget will display the latest news, while the all news page will serve as an archive for older stories.
+
+- **Creating News Articles**: Use the visual editor to craft engaging news content. Set publish dates for immediate or future posting.
+- **Tracking Engagement**: Monitor article performance through the view counter to understand which news items resonate most with your audience.
+- **Scheduling Posts**: Plan and schedule articles to ensure your news is timely and relevant, even if you're unavailable to publish them manually.
 
 For a community-driven website, keeping members informed and engaged with regular news updates can significantly enhance user experience and participation.
