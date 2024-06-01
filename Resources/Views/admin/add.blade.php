@@ -3,11 +3,12 @@
 ])
 
 @push('content')
-    <div class="admin-header d-flex align-items-center">
-        <a href="{{ url('admin/news/list') }}" class="back_btn">
-            <i class="ph ph-caret-left"></i>
-        </a>
+    <div class="admin-header d-flex justify-content-between align-items-center">
         <div>
+            <a class="back-btn" href="{{ url('admin/news/list') }}">
+                <i class="ph ph-arrow-left ignore"></i>
+                @t('def.back')
+            </a>
             <h2>@t('news.admin.add_title')</h2>
             <p>@t('news.admin.add_description')</p>
         </div>
@@ -22,8 +23,11 @@
                 </label>
             </div>
             <div class="col-sm-9">
-                <input name="slug" id="slug" placeholder="@t('news.admin.slug')" type="text" class="form-control"
-                    required>
+                <div class="input-group">
+                    <div class="input-group-text">{{ app('app.url') }}/news/</div>
+                    <input name="slug" id="slug" placeholder="@t('news.admin.slug')" type="text" class="form-control"
+                        required>
+                </div>
             </div>
         </div>
 
@@ -57,7 +61,7 @@
                 </label>
             </div>
             <div class="col-sm-9">
-                <div id="editor"></div>
+                <div data-editorjs id="editorNewsAdd"></div>
             </div>
         </div>
 
@@ -69,6 +73,19 @@
             </div>
             <div class="col-sm-9">
                 <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
+            </div>
+        </div>
+
+        <div class="position-relative row form-group">
+            <div class="col-sm-3 col-form-label">
+                <label for="published_at">
+                    @t('news.admin.published_at')
+                </label>
+                <small>@t('news.admin.published_at_desc')</small>
+            </div>
+            <div class="col-sm-9">
+                <input name="published_at" id="published_at" placeholder="@t('news.admin.published_at_placeholder')" type="datetime-local"
+                    class="form-control">
             </div>
         </div>
 
@@ -85,9 +102,6 @@
 @endpush
 
 @push('footer')
-    <script>
-        window.editorData = {};
-    </script>
     <script src="@asset('assets/js/editor/table.js')"></script>
     <script src="@asset('assets/js/editor/alignment.js')"></script>
     <script src="@asset('assets/js/editor/delimiter.js')"></script>

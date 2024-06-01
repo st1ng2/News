@@ -3,15 +3,39 @@
 ])
 
 @push('content')
-    <div class="admin-header d-flex align-items-center">
-        <a href="{{ url('admin/news/list') }}" class="back_btn">
-            <i class="ph ph-caret-left"></i>
-        </a>
+    <div class="admin-header d-flex justify-content-between align-items-center">
         <div>
+            <a class="back-btn" href="{{ url('admin/news/list') }}">
+                <i class="ph ph-arrow-left ignore"></i>
+                @t('def.back')
+            </a>
             <h2>@t('news.admin.edit_title')</h2>
             <p>@t('news.admin.edit_description')</p>
         </div>
+        <div>
+            <button data-deleteaction="{{ $new->id }}" data-deletepath="news" class="btn size-s error outline">
+                @t('def.delete')
+            </button>
+            <a href="{{ url('news/' . $new->slug) }}" class="btn btn--with-icon size-s ignore outline" target="_blank">
+                @t('def.goto')
+                <span class="btn__icon arrow"><i class="ph ph-arrow-right"></i></span>
+            </a>
+        </div>
     </div>
+
+    @if ($new->published_at && $new->published_at > now())
+        <div class="admin-notification mb-4">
+            <div class="admin-notification-content">
+                <i class="ph ph-warning-circle"></i>
+                <div>
+                    <h4>@t('def.warning')!</h4>
+                    <p>@t('news.admin.new_is_not_published', [
+                        ':date' => $new->published_at->format(default_date_format()),
+                    ])</p>
+                </div>
+            </div>
+        </div>
+    @endif
 
     <form data-id="{{ $new->id }}" data-newsform="edit" data-page="news">
         @csrf
@@ -22,8 +46,11 @@
                 </label>
             </div>
             <div class="col-sm-9">
-                <input name="slug" id="slug" placeholder="@t('news.admin.slug')" type="text" class="form-control"
-                    required value="{{ $new->slug }}">
+                <div class="input-group">
+                    <div class="input-group-text">{{ app('app.url') }}/news/</div>
+                    <input name="slug" id="slug" placeholder="@t('news.admin.slug')" type="text" class="form-control"
+                        required value="{{ $new->slug }}">
+                </div>
             </div>
         </div>
 
@@ -46,8 +73,7 @@
                 </label>
             </div>
             <div class="col-sm-9">
-                <textarea placeholder="@t('news.admin.description_placeholder')" name="description" id="description"
-                    class="form-control">{{ $new->description }}</textarea>
+                <textarea placeholder="@t('news.admin.description_placeholder')" name="description" id="description" class="form-control">{{ $new->description }}</textarea>
             </div>
         </div>
 
@@ -58,7 +84,7 @@
                 </label>
             </div>
             <div class="col-sm-9">
-                <div id="editor"></div>
+                <div data-editorjs id="editorNewsEdit-{{ $new->id }}"></div>
             </div>
         </div>
 
@@ -70,6 +96,18 @@
             </div>
             <div class="col-sm-9">
                 <input type="file" name="image" id="image" class="form-control" accept="image/*">
+            </div>
+        </div>
+
+        <div class="position-relative row form-group">
+            <div class="col-sm-3 col-form-label">
+                <label for="published_at">
+                    @t('news.admin.published_at')
+                </label>
+            </div>
+            <div class="col-sm-9">
+                <input name="published_at" id="published_at" placeholder="@t('news.admin.published_at_placeholder')" type="datetime-local"
+                    class="form-control" value="{{ $new->published_at->format('Y-m-d\TH:i:s') }}" max="2099-12-23T19:37:29">
             </div>
         </div>
 
@@ -86,8 +124,8 @@
 @endpush
 
 @push('footer')
-    <script>
-        window.editorData = {
+    <script data-loadevery>
+        window.defaultEditorData["editorNewsEdit-{{ $new->id }}"] = {
             blocks: {!! $new->blocks->json ?? '[]' !!}
         };
     </script>

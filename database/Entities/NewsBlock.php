@@ -7,7 +7,7 @@ use Cycle\Annotated\Annotation\Entity;
 use Cycle\Annotated\Annotation\Relation\BelongsTo;
 
 /**
- * @Entity(readonlySchema=true)
+ * @Entity()
  */
 class NewsBlock
 {

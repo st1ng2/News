@@ -13,40 +13,6 @@ function serializeFormNews($form) {
     return formData;
 }
 
-function sendnewsRequest(data, path = null, method = 'POST') {
-    let result = null;
-
-    $.ajax({
-        url: u(path),
-        type: method,
-        data: data,
-        processData: false,
-        async: false,
-        success: function (response) {
-            toast({
-                message: response?.success || translate('def.success'),
-                type: 'success',
-            });
-
-            result = response;
-
-            Modals.clear();
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.error('error request', jqXHR, textStatus, errorThrown);
-            toast({
-                message:
-                    jqXHR.responseJSON?.error ?? translate('def.unknown_error'),
-                type: 'error',
-            });
-
-            result = jqXHR.responseJSON;
-        },
-    });
-
-    return result;
-}
-
 $(document).on('submit', '[data-newsform]', async (ev) => {
     let $form = $(ev.currentTarget);
 
@@ -64,11 +30,15 @@ $(document).on('submit', '[data-newsform]', async (ev) => {
         url = `admin/api/${page}/edit/${id}`;
     }
 
-    const save = await editor.save();
+    let activeEditorElement = document.querySelector(
+        '.tab-content:not([hidden]) [data-editorjs]',
+    );
+    let activeEditor = window['editorInstance_' + activeEditorElement.id];
 
-    form.append('blocks', JSON.stringify(save.blocks));
+    let editorData = await activeEditor.save();
+    form.append('blocks', JSON.stringify(editorData.blocks));
 
     if (ev.target.checkValidity()) {
-        sendnewsRequest(form, url, method);
+        sendRequest(form, url, method);
     }
 });

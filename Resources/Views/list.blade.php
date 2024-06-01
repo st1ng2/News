@@ -15,7 +15,16 @@
         @breadcrumb
         @editor
 
-        <h2 class="mb-4">@t('news.all')</h2>
+        <div class="news-header">
+            <h1>@t('news.all')</h1>
+
+            @can('admin.news')
+                <a class="btn btn--with-icon mt-4 outline" href="{{ url('/admin/news/list') }}" role="button">
+                    {{ __('def.admin_panel') }}
+                    <span class="btn__icon arrow"><i class="ph ph-arrow-right"></i></span>
+                </a>
+            @endcan
+        </div>
 
         <div class="news">
             @foreach ($news as $new)

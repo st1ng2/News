@@ -22,11 +22,12 @@ class ApiAdminNewsController extends AbstractController
     {
         try {
             $this->newsService->store(
-                $request->slug, 
-                $request->title, 
-                $request->description, 
-                $request->files->get('image'), 
-                $request->input('blocks', '[]')
+                $request->slug,
+                $request->title,
+                $request->description,
+                $request->files->get('image'),
+                $request->input('blocks', '[]'),
+                $request->published_at,
             );
 
             return $this->success();
@@ -51,11 +52,12 @@ class ApiAdminNewsController extends AbstractController
         try {
             $this->newsService->update(
                 (int) $id,
-                $request->slug, 
-                $request->title, 
-                $request->description, 
-                $request->files->get('image'), 
-                $request->input('blocks', '[]')
+                $request->slug,
+                $request->title,
+                $request->description,
+                $request->files->get('image'),
+                $request->input('blocks', '[]'),
+                $request->published_at,
             );
 
             return $this->success();

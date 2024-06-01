@@ -6,6 +6,7 @@ use Flute\Core\Support\ModuleServiceProvider as AbstractModuleServiceProvider;
 use Flute\Modules\News\ServiceProviders\Extensions\AdminExtension;
 use Flute\Modules\News\ServiceProviders\Extensions\RoutesExtension;
 use Flute\Modules\News\ServiceProviders\Extensions\WidgetExtension;
+use Flute\Modules\News\Services\NewsService;
 
 class ModuleServiceProvider extends AbstractModuleServiceProvider
 {
@@ -19,6 +20,8 @@ class ModuleServiceProvider extends AbstractModuleServiceProvider
     {
         $this->loadEntities();
         $this->loadTranslations();
+
+        $container->get(NewsService::class);
     }
 
     public function register(\DI\Container $container): void

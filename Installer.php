@@ -7,18 +7,24 @@ use Flute\Modules\News\Widgets\News\Widget;
 
 class Installer extends \Flute\Core\Support\AbstractModuleInstaller
 {
-    public function install(\Flute\Core\Modules\ModuleInformation &$module) : bool
+    public function install(\Flute\Core\Modules\ModuleInformation &$module): bool
     {
-        $permission = new Permission;
-        $permission->name = 'admin.news';
-        $permission->desc = 'Позволяет манипулировать новостями';
+        $permission = rep(Permission::class)->findOne([
+            'name' => 'admin.news'
+        ]);
 
-        transaction($permission)->run();
+        if (!$permission) {
+            $permission = new Permission;
+            $permission->name = 'admin.news';
+            $permission->desc = 'news.perm_desc';
+
+            transaction($permission)->run();
+        }
 
         return true;
     }
 
-    public function uninstall(\Flute\Core\Modules\ModuleInformation &$module) : bool
+    public function uninstall(\Flute\Core\Modules\ModuleInformation &$module): bool
     {
         $permission = rep(Permission::class)->findOne([
             'name' => 'admin.news'

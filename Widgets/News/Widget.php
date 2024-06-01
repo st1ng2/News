@@ -60,6 +60,15 @@ class Widget extends AbstractWidget
 
     protected function getNews()
     {
-        return rep(News::class)->select()->orderBy('created_at', 'desc')->limit(10)->fetchAll();
+        $select = rep(News::class)->select()->orderBy('created_at', 'desc')->limit(10);
+
+        if (!user()->hasPermission('admin.news')) {
+            $select = $select->where(function ($query) {
+                $query->where('published_at', '<=', new \DateTime())
+                    ->orWhere('published_at', '=', null);
+            });
+        }
+
+        return $select->fetchAll();
     }
 }
