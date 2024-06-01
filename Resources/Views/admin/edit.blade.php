@@ -107,7 +107,9 @@
             </div>
             <div class="col-sm-9">
                 <input name="published_at" id="published_at" placeholder="@t('news.admin.published_at_placeholder')" type="datetime-local"
-                    class="form-control" value="{{ $new->published_at->format('Y-m-d\TH:i:s') }}" max="2099-12-23T19:37:29">
+                    class="form-control"
+                    @if ($new->published_at) value="{{ $new->published_at->format('Y-m-d\TH:i:s') }}" @endif
+                    max="2099-12-23T19:37:29">
             </div>
         </div>
 
